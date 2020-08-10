@@ -1,2 +1,2 @@
 # Leetcode-Solutions
-It contains solutions for the questions of leetcode.
+It contains topic wise solutions for the important questions of leetcode.
