@@ -1,0 +1,35 @@
+994. https://leetcode.com/problems/rotting-oranges/
+
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        rotten = set()
+        fresh =  set()
+        
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] == 2:
+                    rotten.add(str(i) + "," + str(j))
+                if grid[i][j] == 1:
+                    fresh.add(str(i) + "," + str(j))
+        minutes = 0
+        while len(fresh) > 0:
+            infected = set()
+            directions = ((0,1), (0, -1), (1, 0), (-1, 0))
+            for string in rotten:
+                i, j = string.split(',')
+                i = int(i)
+                j = int(j)
+                for direction in directions:
+                    nextI = i + direction[0]
+                    nextJ = j + direction[1]
+                    infected_value = str(nextI) + "," + str(nextJ)
+                    if infected_value in fresh:
+                        fresh.remove(infected_value)
+                        infected.add(infected_value)
+                        
+            if len(infected) == 0:
+                return -1
+            rotten = infected
+            minutes += 1
+                
+        return minutes
